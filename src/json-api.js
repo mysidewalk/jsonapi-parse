@@ -5,13 +5,10 @@
     jsonapi.parse = function(response) {
         var json, parsed;
 
-        // IF: No response, return response
-        // ELSE IF: Response is a string, try to parse as JSON string
+        // IF: Response is a string, try to parse as JSON string
         // ELSE IF: Response is a object, reassign to local variable
-        if (!response) {
-            return response;
-        }
-        else if (_.isString(response)) {
+        // ELSE: Return whatever the input was
+        if (_.isString(response)) {
             try {
                 json = window.JSON.parse(response);
             }
