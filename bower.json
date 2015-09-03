@@ -1,0 +1,27 @@
+{
+  "name": "json-api",
+  "version": "0.1.0",
+  "description": "A browser side library to support parsing (and hopefully serializing) JSON API style responses and requests.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/username/project.git"
+  },
+  "main": [
+    "src/json-api.js"
+  ],
+  "keywords": [
+    "JSON API"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "bower_components",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~3.10.1"
+  },
+  "authors": [
+    "mySidewalk (https://mysidewalk.com)",
+    "Peter Freeze (https://github.com/pjfreeze)"
+  ]
+}
