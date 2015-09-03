@@ -1,0 +1,26 @@
+{
+  "name": "json-api",
+  "version": "0.1.0",
+  "description": "This library is currently complies and works with [JSON API v1.0](http://jsonapi.org/format/).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests/tests.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^2.3.0"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/index.js mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mysidewalk/json-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mysidewalk/json-api/issues"
+  },
+  "homepage": "https://github.com/mysidewalk/json-api"
+}

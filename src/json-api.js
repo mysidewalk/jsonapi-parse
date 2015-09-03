@@ -27,6 +27,9 @@
         else if (_.isPlainObject(response)) {
             json = response;
         }
+        else {
+            return response;
+        }
 
         // IF: Already parsed, return it
         if (json.jsonapi && json.jsonapi.parsed) {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON API Tests</title>
+        <link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
+
+        <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+        <script src="../node_modules/mocha/mocha.js"></script>
+        <script>
+          function assert(expr, msg) {
+            if (!expr) throw new Error(msg || 'failed');
+          }
+        </script>
+
+        <script src="../bower_components/lodash/lodash.min.js"></script>
+        <script src="../src/json-api.js"></script>
+
+        <script>
+            mocha.setup('bdd');
+        </script>
+        <script src="tests.js"></script>
+        <script>
+            mocha.checkLeaks();
+            mocha.globals(['jsonapi']);
+            window.onload = function() {
+                mocha.run();
+            };
+        </script>
+    </head>
+    <body>
+        <div id="mocha"></div>
+
+    </body>
+</html>
