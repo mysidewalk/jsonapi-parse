@@ -1,7 +1,7 @@
 /**
  * @license
  * lodash 3.10.1 (Custom Build) <https://lodash.com/>
- * Build: `lodash include="findWhere,extend,isString,isPlainObject,map,each,isArray"`
+ * Build: `lodash include="findWhere,extend,isString,isPlainObject,map,each,isArray,isUndefined"`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -2174,6 +2174,26 @@
     return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objToString.call(value)];
   }
 
+  /**
+   * Checks if `value` is `undefined`.
+   *
+   * @static
+   * @memberOf _
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
+   * @example
+   *
+   * _.isUndefined(void 0);
+   * // => true
+   *
+   * _.isUndefined(null);
+   * // => false
+   */
+  function isUndefined(value) {
+    return value === undefined;
+  }
+
   /*------------------------------------------------------------------------*/
 
   /**
@@ -2515,6 +2535,7 @@
   lodash.isPlainObject = isPlainObject;
   lodash.isString = isString;
   lodash.isTypedArray = isTypedArray;
+  lodash.isUndefined = isUndefined;
   lodash.last = last;
 
   // Add aliases.

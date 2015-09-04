@@ -28,6 +28,11 @@
             return response;
         }
 
+        // IF: No required top-level JSON API members, return input
+        if (_.isUndefined(json.data) && _.isUndefined(json.errors) && _.isUndefined(json.meta)) {
+            return json;
+        }
+
         // IF: Already parsed, return it
         if (json.jsonapi && json.jsonapi.parsed) {
             return json;
