@@ -18,9 +18,6 @@
     "node_modules",
     "tests"
   ],
-  "dependencies": {
-    "lodash": "~3.10.1"
-  },
   "authors": [
     "mySidewalk (https://mysidewalk.com)",
     "Peter Freeze (https://github.com/pjfreeze)"
