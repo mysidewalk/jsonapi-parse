@@ -1,7 +1,7 @@
 /**
  * @license
  * lodash 3.10.1 (Custom Build) <https://lodash.com/>
- * Build: `lodash include="findWhere,extend,isString,isPlainObject,map,each,isArray,isUndefined"`
+ * Build: `lodash include="extend,map,each,findWhere,isPlainObject,isString,isArray,isUndefined" -d`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
