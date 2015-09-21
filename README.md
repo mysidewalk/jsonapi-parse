@@ -1,16 +1,17 @@
-# JSON API
+# JSONAPI Parse
 
 This library is currently complies and works with [JSON API v1.0](http://jsonapi.org/format/).
 
 ## Install
-`bower install json-api`
+`bower install jsonapi-parse`
+`npm install jsonapi-parse`
 
 ## API Reference
 
 #### jsonapi.parse(input)
-| Option    | Description                           | Default     |
-| --------: | ------------------------------------- | ----------- |
-|   *input* | A JSON string or JavaScript object    | `undefined` |
+| Option | Description                        | Default     |
+| ------ | ---------------------------------- | ----------- |
+| input  | A JSON string or JavaScript object | `undefined` |
 
 Parses the input provided if it follows the JSON API specification (v1.0). This library currently creates a new object for every nested resource object rather than pointing to the reference of the object form the `included` collection. This is in an effort to reduce difficult to trace bugs. 
 
@@ -60,4 +61,4 @@ This task currently concatenates, compresses (uglify), and moves the source file
 ## TODO
 - Add tests for the output of the parse method
 - Setup Travis CI for running the tests
-- Update dependencies and build process to build the custom lodash module during the build task
+- Add npm package for parsing with Node

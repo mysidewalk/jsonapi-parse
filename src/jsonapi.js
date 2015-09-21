@@ -8,7 +8,7 @@
         // IF: Response is a string, try to parse as JSON string
         // ELSE IF: Response is a object, reassign to local variable
         // ELSE: Return whatever the input was
-        if (_.isString(response)) {
+        if (isString(response)) {
             try {
                 json = window.JSON.parse(response);
             }
@@ -21,7 +21,7 @@
                 throw error;
             }
         }
-        else if (_.isPlainObject(response)) {
+        else if (isObject(response)) {
             json = response;
         }
         else {
@@ -29,7 +29,7 @@
         }
 
         // IF: No required top-level JSON API members, return input
-        if (_.isUndefined(json.data) && _.isUndefined(json.errors) && _.isUndefined(json.meta)) {
+        if (isUndefined(json.data) && isUndefined(json.errors) && isUndefined(json.meta)) {
             return json;
         }
 
@@ -48,7 +48,7 @@
     function deserialize(json) {
         var data, deserialized;
 
-        data = _.map(
+        data = map(
             json.data,
             function(record) {
                 populateRelatedFields(record, json.included);
@@ -80,7 +80,7 @@
             parents = parents ? parents.concat([record]) : [record] ;
         }
 
-        _.each(
+        each(
             record.relationships,
             function(relationship, property) {
 
@@ -91,13 +91,13 @@
 
                 // IF: Relationship has multiple matches, create an array for matched records
                 // ELSE: Assign relationship directly to the property
-                if (_.isArray(relationship.data)) {
-                    record.attributes[property] = _.map(
+                if (isArray(relationship.data)) {
+                    record.attributes[property] = map(
                         relationship.data,
-                            function(data) {
-                                return getMatchingRecord(data, included, parents);
-                            }
-                        );
+                        function(data) {
+                            return getMatchingRecord(data, included, parents);
+                        }
+                    );
                 }
                 else {
                     record.attributes[property] = getMatchingRecord(
@@ -114,7 +114,7 @@
     function getMatchingRecord(relationship, included, parents) {
         var circular, match;
 
-        circular = _.findWhere(
+        circular = findWhere(
             parents,
             {
                 id: relationship.id,
@@ -126,7 +126,7 @@
             return relationship;
         }
 
-        match = _.findWhere(
+        match = findWhere(
             included,
             {
                 id: relationship.id,
@@ -146,7 +146,79 @@
 
     // Flatten the ID of an object with the rest of the attributes on a new object
     function flatten(record) {
-        return _.extend({}, { links: record.links }, record.attributes, { id: record.id });
+        return extend({}, { links: record.links }, record.attributes, { id: record.id });
     }
 
+    function isArray(value) {
+        return Object.prototype.toString.call(value) === '[object Array]';
+    }
+
+    function isString(value) {
+        return Object.prototype.toString.call(value) === '[object String]';
+    }
+
+    function isObject(value) {
+        return Object.prototype.toString.call(value) === '[object Object]';
+    }
+
+    function isUndefined(value) {
+        return value === undefined;
+    }
+
+    function each(collection, iterator) {
+        var key;
+        if (isArray(collection)) {
+            for (key = 0; key < collection.length; key += 1) {
+                iterator(collection[key], key);
+            }
+        }
+        else if (isObject(collection)) {
+            for (key in collection) {
+                if (Object.prototype.hasOwnProperty.call(collection, key)) {
+                    iterator(collection[key], key);
+                }
+            }
+        }
+    }
+
+    function map(collection, iterator) {
+        var transformed = [];
+        each(collection, function(value, key) {
+            transformed.push(iterator(value, key));
+        });
+        return transformed;
+    }
+
+    function every(collection) {
+        var passes = true;
+        each(collection, function(value) { if (value !== true) { passes = false; } });
+        return passes;
+    }
+
+    function findWhere(collection, matches) {
+        var match;
+        each(collection, function(value) {
+            var where = map(matches, function(shouldMatch, property) {
+                return value[property] === shouldMatch;
+            });
+            if (every(where)) {
+                match = value;
+            }
+        });
+        return match;
+    }
+
+    function extend() {
+        var combined = Object(null),
+            sources = Array.prototype.slice.call(arguments);
+        each(
+            sources,
+            function(source) {
+                each(source, function(value, key) {
+                    combined[key] = value;
+                });
+            }
+        );
+        return combined;
+    }
 }(window));

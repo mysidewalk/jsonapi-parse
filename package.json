@@ -1,32 +1,19 @@
 {
-  "name": "json-api",
-  "version": "0.1.0",
-  "description": "This library is currently complies and works with [JSON API v1.0](http://jsonapi.org/format/).",
-  "main": "index.js",
-  "directories": {
-    "test": "tests/tests.js"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-shell": "^0.4.3",
-    "gulp-uglify": "^1.4.0",
-    "lodash-cli": "^3.10.1",
-    "mocha": "^2.3.0"
-  },
-  "scripts": {
-    "test": "node_modules/mocha/index.js mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mysidewalk/json-api.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mysidewalk/json-api/issues"
-  },
-  "homepage": "https://github.com/mysidewalk/json-api"
+    "name": "jsonapi-parse",
+    "version": "1.0.0",
+    "description": "Parses JSON API style responses into a more 'typical' JSON format",
+    "main": "./dist/jsonapi.js",
+    "dependencies": {},
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-uglify": "^1.4.0",
+        "mocha": "^2.3.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mysidewalk/jsonapi-parse.git"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/mysidewalk/jsonapi-parse"
 }
