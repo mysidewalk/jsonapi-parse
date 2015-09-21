@@ -2,7 +2,7 @@
     "name": "jsonapi-parse",
     "version": "1.0.0",
     "description": "Parses JSON API style responses into a more 'typical' JSON format",
-    "main": "./dist/jsonapi.js",
+    "main": "./dist/jsonapi.min.js",
     "dependencies": {},
     "devDependencies": {
         "gulp": "^3.9.0",

@@ -3,7 +3,15 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify');
 
 gulp.task(
-    'build',
+    'normal',
+    function() {
+        return gulp.src('src/*.js')
+            .pipe(gulp.dest('dist'));
+    }
+);
+
+gulp.task(
+    'minified',
     function() {
         return gulp.src('src/*.js')
             .pipe(uglify())
@@ -14,4 +22,9 @@ gulp.task(
             ))
             .pipe(gulp.dest('dist'));
     }
+);
+
+gulp.task(
+    'build',
+    ['normal', 'minified']
 );
