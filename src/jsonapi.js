@@ -48,13 +48,19 @@
     function deserialize(json) {
         var data, deserialized;
 
-        data = map(
-            json.data,
-            function(record) {
-                populateRelatedFields(record, json.included);
-                return flatten(record);
-            }
-        );
+        if (isArray(json.data)) {
+            data = map(
+                json.data,
+                function(record) {
+                    populateRelatedFields(record, json.included);
+                    return flatten(record);
+                }
+            );
+        }
+        else if (isObject(json.data)) {
+            populateRelatedFields(json.data, json.included);
+            data = flatten(json.data);
+        }
 
         deserialized = {
             data: data,

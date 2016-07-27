@@ -1,4 +1,4 @@
-window.exampleData = 
+window.exampleData =
 {
     "data":[
         {
@@ -8298,4 +8298,29 @@ window.exampleData =
     "jsonapi":{
       "version": "1.0.0"
     }
+};
+
+window.exampleDataSingleResouce = {
+    "data": {
+        "type": "articles",
+        "id": "1",
+        "attributes": {
+            "name": "some name"
+        },
+        "relationships": {
+            "owner": {
+                "data": {
+                    "id": "204",
+                    "type": "users"
+                }
+            }
+        }
+    },
+    "included": [{
+        "id": "204",
+        "type": "users",
+        "attributes": {
+            "email": "07221635@example.com"
+        }
+    }]
 };
