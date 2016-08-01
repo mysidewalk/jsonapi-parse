@@ -260,7 +260,7 @@ describe(
                 );
 
                 describe(
-                    'it should parse a single resouce',
+                    'it should parse a single resource',
                     function() {
                         var result;
 
