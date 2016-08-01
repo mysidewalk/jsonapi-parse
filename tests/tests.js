@@ -170,7 +170,7 @@ describe(
                 );
             }
         );
-        
+
         describe(
             'output',
             function() {
@@ -222,7 +222,7 @@ describe(
                         );
                     }
                 );
-    
+
                 // Relies on the data from `example-data.js`
                 describe(
                     'it should add any object specified in the relationships to itself',
@@ -260,6 +260,33 @@ describe(
                 );
 
                 describe(
+                    'it should parse a single resource',
+                    function() {
+                        var result;
+
+                        before(
+                            function() {
+                                result = jsonapi.parse(window.exampleDataSingleResouce);
+                            }
+                        );
+
+                        it(
+                            'should parse the object',
+                            function() {
+                                assert(result.data && result.data.name);
+                            }
+                        );
+
+                        it(
+                            'should add the related object on the key used in the relationships object',
+                            function() {
+                                assert(result.data && result.data.owner && result.data.owner.email);
+                            }
+                        );
+                      }
+                  );
+
+                describe(
                     'it should not de-serialize objects using references to their original ones',
                     function() {
                         it(
@@ -278,7 +305,7 @@ describe(
                 describe(
                     'it should de-serialize circular relationships in the object graph',
                     function() {
-                        
+
                     }
                 );
             }
