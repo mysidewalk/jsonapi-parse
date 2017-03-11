@@ -48,17 +48,23 @@
     function deserialize(json) {
         var data, deserialized;
 
+        var includedMap = {};
+        each(json.included, function(value) {
+            var key = value.type + '-' + value.id;
+            includedMap[key] = value;
+        });
+
         if (isArray(json.data)) {
             data = map(
                 json.data,
                 function(record) {
-                    populateRelatedFields(record, json.included);
+                    populateRelatedFields(record, includedMap);
                     return flatten(record);
                 }
             );
         }
         else if (isObject(json.data)) {
-            populateRelatedFields(json.data, json.included);
+            populateRelatedFields(json.data, includedMap);
             data = flatten(json.data);
         }
 
@@ -79,7 +85,7 @@
     }
 
     // Populate relations of the provided record from the included objects
-    function populateRelatedFields(record, included, parents) {
+    function populateRelatedFields(record, includedMap, parents) {
 
         // IF: Object has relationships, update so this record is listed as a parent
         if (record.relationships) {
@@ -101,14 +107,14 @@
                     record.attributes[property] = map(
                         relationship.data,
                         function(data) {
-                            return getMatchingRecord(data, included, parents);
+                            return getMatchingRecord(data, includedMap, parents);
                         }
                     );
                 }
                 else {
                     record.attributes[property] = getMatchingRecord(
                         relationship.data,
-                        included,
+                        includedMap,
                         parents
                     );
                 }
@@ -132,13 +138,8 @@
             return relationship;
         }
 
-        match = findWhere(
-            included,
-            {
-                id: relationship.id,
-                type: relationship.type
-            }
-        );
+        var key = relationship.type + '-' + relationship.id;
+        match = included[key];
 
         // IF: No match or match is the same as parent, return the relationship information
         if (!match) {
