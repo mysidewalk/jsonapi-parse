@@ -48,10 +48,10 @@
     function deserialize(json) {
         var data, deserialized;
 
-        var includedMap = {}
+        var includedMap = {};
         each(json.included, function(value) {
             var key = value.type + '-' + value.id;
-            includedMap[key] = value
+            includedMap[key] = value;
         });
 
         if (isArray(json.data)) {
@@ -153,7 +153,7 @@
 
     // Flatten the ID of an object with the rest of the attributes on a new object
     function flatten(record) {
-        return extend({}, { links: record.links }, record.attributes, { id: record.id });
+        return extend({}, { links: record.links }, record.attributes, { id: record.id, type: record.type });
     }
 
     // A handful of helper functions
