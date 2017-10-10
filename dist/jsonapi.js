@@ -48,10 +48,10 @@
     function deserialize(json) {
         var data, deserialized;
 
-        var includedMap = {}
+        var includedMap = {};
         each(json.included, function(value) {
             var key = value.type + '-' + value.id;
-            includedMap[key] = value
+            includedMap[key] = value;
         });
 
         if (isArray(json.data)) {
@@ -79,6 +79,10 @@
 
         if (json.errors) {
             deserialized.errors = json.errors;
+        }
+
+        if (json.links) {
+            deserialized.links = json.links;
         }
 
         return deserialized;
