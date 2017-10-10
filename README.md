@@ -46,7 +46,7 @@ window.jsonapi.parse(stringified);
 // Returns
 // {
 //     data: [ 
-//         { id: '12klj', key: 'value', property: true }
+//         { id: '12klj', type: 'primary', key: 'value', property: true }
 //     ],
 //     jsonapi: { parsed: true }
 // }
