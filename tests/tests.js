@@ -168,6 +168,30 @@ describe(
                         );
                     }
                 );
+
+                describe(
+                    'it should allow the "links" property to persist',
+                    function() {
+                        it(
+                            'should not modify or remove any existing jsonapi members',
+                            function() {
+                                var input = { meta: {}, links: { self: 'https://example.com/?page=1' } };
+                                var result = window.jsonapi.parse(input);
+
+                                assert(result.links.self === input.links.self);
+                            }
+                        );
+                        it(
+                            'should not modify or remove the jsonapi member',
+                            function() {
+                                var input = { meta: {}, links: { self: 'https://example.com/?page=1' } };
+                                var result = window.jsonapi.parse(input);
+
+                                assert(result.links === input.links);
+                            }
+                        );
+                    }
+                );
             }
         );
 

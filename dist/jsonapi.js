@@ -81,6 +81,10 @@
             deserialized.errors = json.errors;
         }
 
+        if (json.links) {
+            deserialized.links = json.links;
+        }
+
         return deserialized;
     }
 
