@@ -89,16 +89,27 @@
     }
 
     // Populate relations of the provided record from the included objects
-    function populateRelatedFields(record, includedMap, parents) {
+    function populateRelatedFields(record, includedMap, parents, fromRelationship) {
 
         // IF: Object has relationships, update so this record is listed as a parent
         if (record.relationships) {
             parents = parents ? parents.concat([record]) : [record] ;
         }
 
+        // IF: relationship defined meta, merge with record provided meta
+        if (fromRelationship && isObject(fromRelationship.meta)) {
+            record.meta = extend({}, record.meta, relationship.meta);
+        }
+
         each(
             record.relationships,
             function(relationship, property) {
+                // IF: relationship describes non-record specific meta;
+                // append relationship meta to the record
+                if (relationship && isObject(relationship.meta)) {
+                    record.meta = record.meta || {};
+                    record.meta[property] = relationship.meta;
+                }
 
                 // IF: No relationship data, don't add anything
                 if (!relationship.data) {
@@ -150,14 +161,14 @@
             return relationship;
         }
 
-        populateRelatedFields(match, included, parents);
+        populateRelatedFields(match, included, parents, relationship);
 
         return flatten(match);
     }
 
     // Flatten the ID of an object with the rest of the attributes on a new object
     function flatten(record) {
-        return extend({}, { links: record.links }, record.attributes, { id: record.id, type: record.type });
+        return extend({}, { links: record.links, meta: record.meta }, record.attributes, { id: record.id, type: record.type });
     }
 
     // A handful of helper functions

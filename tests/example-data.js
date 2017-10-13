@@ -8324,3 +8324,49 @@ window.exampleDataSingleResouce = {
         }
     }]
 };
+
+window.exampleWithMeta = {
+  "data": {
+    "id": "1",
+    "type": "person",
+    "attributes": {
+      "full_name": "Jane Doe"
+    },
+    "meta": {
+      "age": 11
+    },
+    "relationships": {
+      "friends": {
+        "data": [
+          {
+            "id": "3",
+            "type": "person",
+            "meta": {
+              "is_best_friend": false
+            }
+          }
+        ],
+        "meta": {
+          "friend_count": 5
+        }
+      }
+    }
+  },
+  "included": [{
+    "id": "3",
+    "type": "person",
+    "attributes": {
+      "full_name": "John Doe"
+    },
+    "meta": {
+      "age": 10
+    },
+    "relationships": {
+        "friends": {
+            "meta": {
+                "friend_count": 1
+            }
+        }
+    }
+  }]
+};
