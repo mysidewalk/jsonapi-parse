@@ -372,9 +372,9 @@ describe(
                             'should not share the "meta object" from relationships across all instances of resource',
                             function() {
                                 var person1 = output.data;
-                                var person2a = person1.friends[0];
+                                var person2a = person1.friends[0]; // Has relationship meta
                                 var person3 = person1.brother;
-                                var person2b = person3.friends[0];
+                                var person2b = person3.friends[0]; // Does not have same relationship meta
 
                                 assert(person2a.meta.is_best_friend === true);
                                 assert(person2b.meta.is_best_friend === undefined);
