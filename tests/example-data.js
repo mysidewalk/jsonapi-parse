@@ -8325,7 +8325,7 @@ window.exampleDataSingleResouce = {
     }]
 };
 
-window.exampleWithMeta = {
+window.exampleDataWithMeta = {
   "data": {
     "id": "1",
     "type": "person",
@@ -8339,34 +8339,71 @@ window.exampleWithMeta = {
       "friends": {
         "data": [
           {
-            "id": "3",
+            "id": "2",
             "type": "person",
             "meta": {
-              "is_best_friend": false
+              "is_best_friend": true
             }
           }
         ],
         "meta": {
           "friend_count": 5
         }
+      },
+      "brother": {
+        "data": {
+          "id": "3",
+          "type": "person",
+          "meta": {
+            "is_younger": true
+          }
+        },
+        "meta": {
+          "is_friends_with_brother": false
+        }
       }
     }
   },
-  "included": [{
-    "id": "3",
-    "type": "person",
-    "attributes": {
-      "full_name": "John Doe"
-    },
-    "meta": {
-      "age": 10
-    },
-    "relationships": {
+  "included": [
+    {
+      "id": "2",
+      "type": "person",
+      "attributes": {
+        "full_name": "Billy Bob"
+      },
+      "meta": {
+        "age": 11
+      },
+      "relationships": {
         "friends": {
-            "meta": {
-                "friend_count": 1
-            }
+          "meta": {
+            "friend_count": 7
+          }
         }
+      }
+    },
+    {
+      "id": "3",
+      "type": "person",
+      "attributes": {
+        "full_name": "John Doe"
+      },
+      "meta": {
+        "age": 7
+      },
+      "relationships": {
+        "friends": {
+          "data": [
+            {
+              "id": "2",
+              "type": "person"
+            }
+          ],
+          "meta": {
+            "friend_count": 1
+          }
+        }
+      }
     }
-  }]
+  ]
 };

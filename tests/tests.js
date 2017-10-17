@@ -327,9 +327,57 @@ describe(
                 );
 
                 describe(
-                    'it should de-serialize circular relationships in the object graph',
+                    '"meta objects" should be placed on the resulting records',
                     function() {
+                        var output;
+                        before(function() {
+                            output = jsonapi.parse(window.exampleDataWithMeta);
+                        });
 
+                        it(
+                            'should move a "meta object" from a resource object or resource identifier to the resulting record',
+                            function() {
+                                var person1 = output.data;
+                                var person2 = person1.friends[0];
+
+                                assert(person1.meta.age === 11);
+                                assert(person2.meta.age === 11);
+                            }
+                        );
+
+                        it(
+                            'should move the "meta object" on a relationship object to the relationship owning record',
+                            function() {
+                                var person1 = output.data;
+                                assert(person1.meta.friends.friend_count === 5);
+                                assert(person1.meta.brother.is_friends_with_brother === false);
+                            }
+                        );
+
+                        it(
+                            'should move the "meta object" on a resource identifier to the related record\'s meta',
+                            function() {
+                                var person1 = output.data;
+                                var person2 = person1.friends[0];
+                                assert(person2.meta.is_best_friend === true);
+
+                                var person3 = person1.brother;
+                                assert(person3.meta.is_younger === true);
+                            }
+                        );
+
+                        it(
+                            'should NOT share the "meta object" from relationships across all instances of resource',
+                            function() {
+                                var person1 = output.data;
+                                var person2a = person1.friends[0];
+                                var person3 = person1.brother;
+                                var person2b = person3.friends[0];
+
+                                assert(person2a.meta.is_best_friend === true);
+                                assert(person2b.meta.is_best_friend === undefined);
+                            }
+                        );
                     }
                 );
             }
