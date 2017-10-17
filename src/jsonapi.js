@@ -98,7 +98,7 @@
 
         // IF: relationship defined meta, merge with record provided meta
         if (fromRelationship && isObject(fromRelationship.meta)) {
-            record.meta = extend({}, record.meta, relationship.meta);
+            record.meta = extend({}, record.meta, fromRelationship.meta);
         }
 
         each(
