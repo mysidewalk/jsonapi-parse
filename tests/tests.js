@@ -1,5 +1,5 @@
 describe(
-    'JSONAPI.parse',
+    'jsonapi.parse',
     function() {
         describe(
             'input',
@@ -327,47 +327,49 @@ describe(
                 );
 
                 describe(
-                    '"meta objects" should be placed on the resulting records',
+                    '"meta object"s should be placed on the resulting records',
                     function() {
-                        var output;
+                        var input, output;
                         before(function() {
-                            output = jsonapi.parse(window.exampleDataWithMeta);
+                            input = window.exampleDataWithMeta;
+                            output = jsonapi.parse(input);
                         });
 
                         it(
                             'should move a "meta object" from a resource object or resource identifier to the resulting record',
                             function() {
-                                var person1 = output.data;
-                                var person2 = person1.friends[0];
+                                var person1Input = input.data;
+                                var person1Output = output.data;
 
-                                assert(person1.meta.age === 11);
-                                assert(person2.meta.age === 11);
+                                assert(person1Input.meta.age === person1Output.meta.age);
                             }
                         );
 
                         it(
                             'should move the "meta object" on a relationship object to the relationship owning record',
                             function() {
-                                var person1 = output.data;
-                                assert(person1.meta.friends.friend_count === 5);
-                                assert(person1.meta.brother.is_friends_with_brother === false);
+                                var person1Input = input.data;
+                                var person1Output = output.data;
+                                assert(person1Input.relationships.friends.meta.friend_count === person1Output.meta.friends.friend_count);
+                                assert(person1Input.relationships.brother.meta.is_friends_with_brother === person1Output.meta.brother.is_friends_with_brother);
                             }
                         );
 
                         it(
                             'should move the "meta object" on a resource identifier to the related record\'s meta',
                             function() {
-                                var person1 = output.data;
-                                var person2 = person1.friends[0];
-                                assert(person2.meta.is_best_friend === true);
+                                var person1Input = input.data;
+                                var person2Input = input.included[1];
+                                var person2Output = output.data.friends[0];
+                                assert(person1Input.relationships.friends.data[0].meta.is_best_friend === person2Output.meta.is_best_friend);
 
-                                var person3 = person1.brother;
-                                assert(person3.meta.is_younger === true);
+                                var person3Output = output.data.brother;
+                                assert(person1Input.relationships.brother.data.meta.is_younger === person3Output.meta.is_younger);
                             }
                         );
 
                         it(
-                            'should NOT share the "meta object" from relationships across all instances of resource',
+                            'should not share the "meta object" from relationships across all instances of resource',
                             function() {
                                 var person1 = output.data;
                                 var person2a = person1.friends[0];
