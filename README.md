@@ -3,7 +3,6 @@
 This library is currently complies and works with [JSON API v1.0](http://jsonapi.org/format/).
 
 ## Install
-`bower install jsonapi-parse`
 `npm install jsonapi-parse`
 
 ## API Reference
