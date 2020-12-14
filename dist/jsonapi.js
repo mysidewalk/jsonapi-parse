@@ -111,6 +111,11 @@
                     return;
                 }
 
+                // IF: No attributes, populate with empty object
+                if (!isObject(record.attributes)) {
+                    record.attributes = {};
+                }
+
                 // IF: Relationship has multiple matches, create an array for matched records
                 // ELSE: Assign relationship directly to the property
                 if (isArray(relationship.data)) {

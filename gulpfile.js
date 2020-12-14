@@ -26,5 +26,5 @@ gulp.task(
 
 gulp.task(
     'build',
-    ['normal', 'minified']
+    gulp.parallel('normal', 'minified')
 );

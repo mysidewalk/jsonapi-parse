@@ -1634,10 +1634,6 @@ window.exampleData =
         {
             "id":"11",
             "type":"books",
-            "attributes":{
-                "date_published":"1937-09-21",
-                "title":"The Hobbit"
-            },
             "relationships":{
                 "chapters":{
                     "links":{
