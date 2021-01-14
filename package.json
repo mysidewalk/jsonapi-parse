@@ -17,6 +17,7 @@
         "type": "git",
         "url": "https://github.com/mysidewalk/jsonapi-parse.git"
     },
+    "registry": "https://registry.npmjs.org/",
     "license": "MIT",
     "homepage": "https://github.com/mysidewalk/jsonapi-parse"
 }
